@@ -4,6 +4,8 @@
 
 > One prompt. One link. One book.
 
+<img width="1470" height="1070" alt="image" src="https://github.com/user-attachments/assets/e6790bce-a429-43af-a332-30e9fcfc1fb8" />
+
 ---
 
 ## What it does
