@@ -70,7 +70,7 @@ Before building, Claude asks you five quick questions (all have sensible default
 | 1 | **Tone?** | Bill Bryson meets Neil deGrasse Tyson |
 | 2 | **Length?** | Claude judges based on source richness |
 | 3 | **Add internet research?** | No (source-only) |
-| 4 | **Output format?** | PDF (Kindle-optimized) |
+| 4 | **Output format?** | Kindle PDF (6×9") — also supports Print PDF, DOCX, Markdown, EPUB |
 | 5 | **Special requests?** | None |
 
 Say "defaults are fine" and Claude starts building immediately.
