@@ -109,7 +109,7 @@ The reader should never know they're reading something that was once a conversat
 | 7 | The Builder Nation | 1,088 |
 | 8 | The Token Factories | 1,338 |
 
-📥 **[Download the example PDF](./examples/Jensen_Huang_NVIDIA_AI_Revolution.pdf)**
+📥 **[Download the example PDF](./Jensen_Huang_NVIDIA_AI_Revolution.pdf)**
 
 ### Sample passage (Chapter 1)
 
