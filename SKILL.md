@@ -18,15 +18,26 @@ Turn raw source material into a book people actually want to read.
 Before doing anything else, present these to the user. Offer the defaults so
 they can say "defaults are fine" and you proceed immediately.
 
-| # | Question | Default |
-|---|----------|---------|
-| 1 | **Tone of the book?** | Bill Bryson meets Neil deGrasse Tyson: warm, witty, curious, vivid, accessible |
-| 2 | **Length of the book?** | Whatever Claude judges adequate for the source |
-| 3 | **Search the internet for extra detail/references?** | No |
-| 4 | **Output format?** | PDF (Kindle-optimized) |
-| 5 | **Any special requests?** | None |
+| # | Question | Default | Options |
+|---|----------|---------|---------|
+| 1 | **Tone of the book?** | Bill Bryson meets Neil deGrasse Tyson: warm, witty, curious, vivid, accessible | Any tone the user describes |
+| 2 | **Length of the book?** | Whatever Claude judges adequate for the source | Short / Medium / Long / Custom |
+| 3 | **Search the internet for extra detail/references?** | No | Yes / No |
+| 4 | **Output format?** | PDF (Kindle-optimized, 6x9") | **Kindle PDF** (6x9"), **Print PDF** (A4/Letter), **DOCX** (Word), **Markdown**, **EPUB** |
+| 5 | **Any special requests?** | None | Diagrams, glossary, focus area, audience, etc. |
 
 Once confirmed, do not ask further questions. Just build.
+
+### Output format details
+
+- **Kindle PDF** (default): 6x9" pages, Times-Roman 11pt, optimized for
+  e-readers and Kindle Direct Publishing. Includes cover page.
+- **Print PDF**: A4 or US Letter, wider margins, suitable for printing.
+  Includes cover page.
+- **DOCX**: Microsoft Word document with styled headings, suitable for
+  further editing. Use the docx skill for generation.
+- **Markdown**: Single concatenated `.md` file with all chapters. No cover.
+- **EPUB**: Reflowable e-book format for Apple Books, Kobo, etc.
 
 ---
 
@@ -123,6 +134,52 @@ Every chapter follows this exact template (the PDF builder parses it):
 
 ---
 
+## Book cover
+
+Every book (PDF and EPUB formats) must include a simple, clean cover page as
+the very first page. The cover should:
+
+- Display the **book title** prominently (large, bold, centered)
+- Display the **subtitle** if one exists (smaller, below the title)
+- Include a subtle decorative element (a horizontal rule, a small ornament,
+  or a minimal geometric shape — nothing garish)
+- Show **"Based on [SOURCE NAME]"** in small text near the bottom,
+  e.g. "Based on Lex Fridman Podcast #494 with Jensen Huang"
+- Include the **source URL** in small, light-colored text at the very bottom
+  so the reader can find the original
+- Use a clean, professional color palette (black/dark text on white, with
+  one accent color at most)
+
+The cover is page 1. The about/disclaimer page follows. Then the table of
+contents. Then chapters.
+
+---
+
+## Copyright and personal use disclaimer
+
+This skill is intended for **personal, non-commercial use only**. The "About
+This Book" page (page 2 of every generated book) must always include the
+following disclaimer, adapted to reflect the actual source:
+
+> **Disclaimer**
+>
+> This book was generated for personal use using AI. It is a narrative
+> adaptation of publicly available source material. All original content,
+> ideas, quotes, and intellectual property belong to their respective
+> owners and creators.
+>
+> **Source:** [Full name of podcast/article/lecture with URL]
+>
+> This book is not affiliated with, endorsed by, or licensed by the
+> original content creators. It is intended solely for personal reading
+> and study. Do not distribute commercially.
+
+This disclaimer is non-negotiable. It must appear in every generated book
+regardless of output format. For DOCX and Markdown outputs, include it as
+a front-matter section.
+
+---
+
 ## Workflow
 
 ### 1. Setup
@@ -183,10 +240,11 @@ rewrite). Specs:
 - 6×9 inch pages (Kindle standard)
 - Margins: inner 0.75", outer 0.65", top 0.75", bottom 0.65"
 - Times-Roman 11pt, 17pt leading, justified, 18pt first-line indent
-- Front matter: title page → about page → linked table of contents
+- Front matter: **cover page** → about/disclaimer page → linked table of contents
 - Each chapter on a fresh page with bookmark anchors
 - No running headers/footers (Kindle strips them)
 - Set title/author metadata
+- Cover must show title, subtitle, source attribution, and source URL
 
 Verify with pypdf after build (page count, metadata, chapter placement).
 Copy to `/mnt/user-data/outputs/` and `present_files`.
