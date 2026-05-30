@@ -19,7 +19,7 @@ Before doing anything else, present these to the user. Offer the defaults so
 they can say "defaults are fine" and you proceed immediately.
 
 | # | Question | Default | Options |
-|---|----------|---------|---------|
+|---|----------|---------|---------| 
 | 1 | **Tone of the book?** | Bill Bryson meets Neil deGrasse Tyson: warm, witty, curious, vivid, accessible | Any tone the user describes |
 | 2 | **Length of the book?** | Whatever Claude judges adequate for the source | Short / Medium / Long / Custom |
 | 3 | **Search the internet for extra detail/references?** | No | Yes / No |
@@ -184,12 +184,10 @@ a front-matter section.
 
 ### 1. Setup
 
-```
 /home/claude/book/
-  chapters/        # NN_slug.md files (source of truth)
-  sources/         # raw text saved to disk
-  build_pdf.py     # the build script
-```
+chapters/        # NN_slug.md files (source of truth)
+sources/         # raw text saved to disk
+build_pdf.py     # the build script
 
 Show the user a chapter table (number, title, subject) and update it after
 every chapter with word counts and progress.
