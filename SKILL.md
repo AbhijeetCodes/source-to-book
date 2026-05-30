@@ -1,201 +1,204 @@
----
-name: source-to-book
-description: >
-  Transform any long-form source (podcast transcripts, interviews, lectures,
-  blog posts, articles, essays) into a polished, easy-to-read book of narrative
-  chapters, compiled into a Kindle-friendly PDF. Trigger when the user wants to
-  turn source material into "a book," "chapters," or a downloadable manuscript.
----
-
 # Source → Book
 
-Turn raw source material into a book people actually want to read.
+**Turn any podcast transcript, interview, lecture, or long-form article into a polished, Kindle-ready book — using Claude.**
+
+> One prompt. One link. One book.
 
 ---
 
-## ALWAYS ask these five questions first
+## What it does
 
-Before doing anything else, present these to the user. Offer the defaults so
-they can say "defaults are fine" and you proceed immediately.
+Give Claude a URL (or paste raw text) and this skill transforms it into a proper narrative book:
+
+- Converts dialogue / Q&A into flowing prose (no "the host asked…" or "he replied…")
+- Structures the content into chapters with dramatic arcs
+- Produces a **6×9" Kindle-optimized PDF** with title page, table of contents, and clean typography
+- Preserves every important fact, quote, and insight from the source
+- Writes in a warm, accessible voice (default: Bill Bryson meets Neil deGrasse Tyson)
+
+---
+
+## Quick start
+
+### Option 1: Copy the prompt directly
+
+1. Open [Claude](https://claude.ai)
+2. Copy the entire contents of [`SKILL.md`](./SKILL.md)
+3. Paste it as the **first message** in a new conversation (or add it to your project instructions)
+4. Then type your request:
+
+```
+/source-to-book convert to book: https://lexfridman.com/jensen-huang-transcript/
+```
+
+### Option 2: Point Claude to this repo
+
+1. Open [Claude](https://claude.ai)
+2. Say:
+
+```
+Use the source-to-book skill from this GitHub repo:
+https://github.com/YOUR_USERNAME/source-to-book
+
+Convert this to a book: https://lexfridman.com/jensen-huang-transcript/
+```
+
+Claude will fetch the `SKILL.md` and follow the instructions.
+
+---
+
+## How it works
+
+```
+You provide                          Claude produces
+─────────────                        ───────────────
+Podcast transcript          →        8-12 chapter narrative book
+Interview URL               →        Kindle-ready 6×9" PDF
+Lecture notes                →        Title page + TOC + chapters
+Blog post / essay            →        ~10,000-50,000 words
+```
+
+### The 5-question setup
+
+Before building, Claude asks you five quick questions (all have sensible defaults):
 
 | # | Question | Default |
 |---|----------|---------|
-| 1 | **Tone of the book?** | Bill Bryson meets Neil deGrasse Tyson: warm, witty, curious, vivid, accessible |
-| 2 | **Length of the book?** | Whatever Claude judges adequate for the source |
-| 3 | **Search the internet for extra detail/references?** | No |
+| 1 | **Tone?** | Bill Bryson meets Neil deGrasse Tyson |
+| 2 | **Length?** | Claude judges based on source richness |
+| 3 | **Add internet research?** | No (source-only) |
 | 4 | **Output format?** | PDF (Kindle-optimized) |
-| 5 | **Any special requests?** | None |
+| 5 | **Special requests?** | None |
 
-Once confirmed, do not ask further questions. Just build.
-
----
-
-## The cardinal rule: transform, don't transcribe
-
-The source is conversation. The output is a book. These are fundamentally
-different forms. The skill must convert dialogue, Q&A, rambling discussion, and
-spoken-word tangents into clean, flowing narrative prose.
-
-**Never do this:**
-- Preserve "Host: ... Guest: ..." dialogue format
-- Write "David said... then Ben replied..."
-- Summarize the conversation turn by turn
-- Use "the hosts discussed" / "the episode covered"
-
-**Always do this:**
-- Absorb the facts, stories, insights, and quotes from the source
-- Restructure them into a narrative with a dramatic spine
-- Write as an omniscient narrator telling the story directly to the reader
-- Weave in direct quotes sparingly and naturally ("As Jensen put it, ...")
-- Make it read like the person picked up a book, not a transcript
-
-The reader should never be aware they are reading something that was once a
-conversation. It should feel written from the ground up as a book.
+Say "defaults are fine" and Claude starts building immediately.
 
 ---
 
-## Voice (default: Bill Bryson + Neil deGrasse Tyson)
+## The cardinal rule
 
-- **Bryson:** warmth, gentle wit, an eye for the telling human detail, a rhythm
-  that feels like a smart friend telling you a great story. Never sarcastic.
-- **Tyson:** clarity, genuine wonder, clean analogies for hard ideas, enthusiasm
-  that respects the reader's intelligence. Never condescending.
-- **Together:** easy to read, never dense or jargon-clogged, never dumbed down.
-  Explain every technical idea in plain language with an analogy, then move on.
-  Keep the reader smiling and learning at the same time.
+**Transform, don't transcribe.**
 
-If the user chose a different tone, honor it fully.
+The reader should never know they're reading something that was once a conversation. The book reads as if it were written from scratch — an omniscient narrator telling a compelling story, with direct quotes woven in sparingly and naturally.
 
 ---
 
-## Completeness: do not drop facts
+## Example
 
-Easy to read does not mean lossy. The book must preserve every important detail,
-fact, figure, name, and idea from the source. Before finishing each chapter,
-check the source for: the main people and their roles, founding/origin details,
-central turning points, crucial numbers (dates, revenue, stakes), the core
-mechanism or business model, the decisive quotes, and the "why it matters"
-payoff. Weave them into narrative rather than listing them. Go deeper rather
-than cutting.
+### Input
 
----
+```
+/source-to-book convert to book: https://lexfridman.com/jensen-huang-transcript/
+```
 
-## No external research (unless user said yes)
+**Source:** Lex Fridman Podcast #494 — Jensen Huang: NVIDIA, The $4 Trillion Company & the AI Revolution (2h 20m conversation)
 
-Work only from the supplied source. Do not search the web, fetch URLs, or add
-outside facts. If the source has a gap, tell the user rather than filling it
-from outside knowledge. Never fabricate quotes, statistics, or events.
+### Output
 
-If the user answered yes to question 3, you may add corroborating detail from
-web research, clearly attributed.
+**"The AI Factory: Jensen Huang, NVIDIA, and the Revolution That Changed Everything"**
 
----
+📄 **47 pages** · 8 chapters · ~10,100 words · Kindle-optimized PDF
 
-## Formatting rules
+| Chapter | Title | Words |
+|---------|-------|-------|
+| 1 | The Bet That Nearly Killed Them | 1,433 |
+| 2 | Sixty Reports and No One-on-Ones | 1,348 |
+| 3 | The Four Laws of Intelligence | 1,306 |
+| 4 | The Supply Chain Whisperer | 1,207 |
+| 5 | Power, the Invisible Bottleneck | 1,250 |
+| 6 | The Speed of Light | 1,135 |
+| 7 | The Builder Nation | 1,088 |
+| 8 | The Token Factories | 1,338 |
 
-- **Zero em-dashes.** Also avoid en-dashes, double-hyphens, or semicolons used
-  as dashes. Use commas, parentheses, or full stops instead.
-- No bullet points or sub-headers inside prose. Continuous narrative only.
-- Use `---` between major sections within a chapter.
-- Quotes woven into sentences, short and purposeful. Never fabricated.
+📥 **[Download the example PDF](./examples/Jensen_Huang_NVIDIA_AI_Revolution.pdf)**
 
----
+### Sample passage (Chapter 1)
 
-## Chapter file structure
-
-Every chapter follows this exact template (the PDF builder parses it):
-
-```markdown
-# Chapter N
-
-## The Evocative Title
-
-*One italic sentence previewing the arc and seeding curiosity.*
+> *There is a particular flavor of corporate gamble that looks, in retrospect, like genius, but in the moment feels a lot more like jumping off a cliff while still sewing the parachute. The decision by NVIDIA to embed CUDA into every GeForce graphics card it shipped was exactly that kind of gamble. It nearly destroyed the company. It also, as things turned out, laid the foundation for the most consequential computing platform of the twenty-first century.*
 
 ---
 
-[opening scene or hook]
+## What sources work best
 
-[narrative body in movements separated by ---]
+| Source type | Quality | Notes |
+|-------------|---------|-------|
+| Podcast transcripts (1-3 hours) | Excellent | Rich, detailed — produces the best books |
+| Long interviews | Excellent | Especially technical or biographical ones |
+| Lecture series | Great | Each lecture maps naturally to a chapter |
+| Long blog posts / essays | Good | Multiple posts can be combined |
+| Short articles (<2000 words) | Fair | May produce only 1-2 chapters |
+| Fiction / poetry | Not designed for this | Use a different approach |
 
-[closing that lands the meaning]
+---
+
+## Customization
+
+### Tone presets
+
+You can ask for any tone. Some examples:
+
+- **Default:** Bill Bryson + Neil deGrasse Tyson (warm, witty, curious)
+- **Business:** Jim Collins style (analytical, case-study driven)
+- **Technical:** IEEE longform (precise, detailed, academic)
+- **Journalistic:** New Yorker profile style (literary, character-driven)
+- **Casual:** Tim Urban / Wait But Why (conversational, fun, lots of analogies)
+
+### Output formats
+
+- **PDF** (default) — Kindle-optimized 6×9", Times Roman, justified
+- **Markdown** — concatenated `.md` file
+- **DOCX** — Word document (if Claude has the docx skill)
+- **Individual chapters** — separate `.md` files
+
+### Special requests
+
+- "Add diagrams based on the conversation"
+- "Include a glossary of technical terms"
+- "Make it shorter / longer"
+- "Focus only on the leadership and management parts"
+- "Write it for a teenage audience"
+
+---
+
+## File structure
+
+When Claude builds the book, it creates:
+
+```
+book/
+├── chapters/
+│   ├── 01_chapter_slug.md
+│   ├── 02_chapter_slug.md
+│   └── ...
+├── sources/
+│   └── raw_transcript.txt
+├── build_pdf.py
+└── Final_Book_Title.pdf
 ```
 
 ---
 
-## Workflow
+## Tips for best results
 
-### 1. Setup
+1. **Longer sources = better books.** A 2-hour podcast transcript gives Claude enough material for 8-12 rich chapters. A 500-word article won't produce much.
 
-```
-/home/claude/book/
-  chapters/        # NN_slug.md files (source of truth)
-  sources/         # raw text saved to disk
-  build_pdf.py     # the build script
-```
+2. **Say "defaults are fine"** if you just want to get going fast. The defaults are well-tuned.
 
-Show the user a chapter table (number, title, subject) and update it after
-every chapter with word counts and progress.
+3. **Ask for specific things** in the "special requests" field: diagrams, focus areas, audience level, chapter count preferences.
 
-### 2. Load source
+4. **The transcript doesn't have to be perfect.** Claude handles messy, auto-generated transcripts well. Human-generated ones are better, but not required.
 
-- Large tool results: extract text, save to `sources/NN_slug.txt`.
-- Don't read entire sources into context. Scan for key beats with grep/sed,
-  then read only those ranges.
-- Blogs/articles: save raw text the same way; split into chapters by theme.
-- If a source connection drops, tell the user. Do not silently fill from
-  your own knowledge.
+5. **You can iterate.** After the first build, ask Claude to expand thin chapters, add a new chapter on a missed topic, or adjust the tone.
 
-### 3. Draft each chapter
+---
 
-- Read key sections of the source. Identify the dramatic spine.
-- Write the chapter as narrative prose following the voice and formatting rules.
-- Match depth to source richness: rich sources get 4,000-9,000 words, thin
-  sources 2,500-3,500. If a draft is thin on a rich source, expand with
-  str_replace insertions.
+## License
 
-### 4. Audit each chapter
+MIT — use it however you like.
 
-```bash
-wc -w chapters/NN_slug.md
-python3 -c "
-t = open('chapters/NN_slug.md').read()
-print('em-dash:', t.count('\u2014'), 'en-dash:', t.count('\u2013'), 'double-hyphen:', t.count('--'))
-"
-```
+---
 
-All counts must be 0 (or near-zero and deliberate). Fix before moving on.
-Copy approved file to `/mnt/user-data/outputs/Chapter_NN_Name.md`.
+## Credits
 
-### 5. Full manuscript audit
-
-Before building: confirm zero dashes everywhere, print all word counts, verify
-chapter header shapes (`# Chapter N / ## Title / *subtitle*`), and do a final
-completeness check that no major source fact was dropped.
-
-### 6. Build PDF
-
-`pip install reportlab --break-system-packages`
-
-Use the shipped `build_pdf_template.py` (adapt title/metadata; reuse, don't
-rewrite). Specs:
-
-- 6×9 inch pages (Kindle standard)
-- Margins: inner 0.75", outer 0.65", top 0.75", bottom 0.65"
-- Times-Roman 11pt, 17pt leading, justified, 18pt first-line indent
-- Front matter: title page → about page → linked table of contents
-- Each chapter on a fresh page with bookmark anchors
-- No running headers/footers (Kindle strips them)
-- Set title/author metadata
-
-Verify with pypdf after build (page count, metadata, chapter placement).
-Copy to `/mnt/user-data/outputs/` and `present_files`.
-
-Other formats if requested: Markdown (concatenated), DOCX (use docx skill),
-EPUB/MOBI (true reflowable e-book).
-
-### 7. Deliver with evaluation
-
-Brief honest assessment: strongest chapters, chapters worth deepening,
-any style issues from automated cleanup, confirmation that the tone was
-applied and no major facts were dropped, output spec summary.
+- Skill designed for use with [Claude](https://claude.ai) by Anthropic
+- PDF generation uses [ReportLab](https://www.reportlab.com/)
+- Example source: [Lex Fridman Podcast #494](https://lexfridman.com/jensen-huang/) with Jensen Huang
